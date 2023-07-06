@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Setup node version
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -33,7 +36,7 @@ jobs:
       - name: Execute Link Checker and Show Broken Links
         env:
           TEMPORARY_WEBSITE_URL: "http://127.0.0.1:8000"
-          ACTUAL_WEBSITE_URL: "https://site-deforesting.github.io/simssa.github.io"
+          ACTUAL_WEBSITE_URL: "https://site-deforesting.github.io/linkedmusic-website" #"https://linkedmusic.ca"
         run: |
           output=$(blc $TEMPORARY_WEBSITE_URL -re --filter-level=3 | \
             grep -v -E '├───OK───|└───OK───' | \
